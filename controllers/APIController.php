@@ -14,6 +14,7 @@ class APIController {
 
     public static function guardar() {
 
+        debuguear($_SESSION);
         //Almacena la Cita y devuelve el Id de la cita        
         $cita = new Cita($_POST);
         $resultado = $cita->guardar();
