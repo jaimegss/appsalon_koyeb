@@ -62,7 +62,7 @@ class Email {
         $contenido .= "<p>Hola <span style='color: #3498db;'>" . $this->nombre . "</span>,</p>";
         $contenido .= "<p>Gracias por crear tu cuenta en AppSalon.</p>";
         $contenido .= "<p>Para confirmar tu cuenta, haz clic en el siguiente botón:</p>";
-        $contenido .= "<a href='" . $_ENV['APP'] . "/confirmar-cuenta?token=" . $this->token . "'>Confirmar Cuenta</a>";
+        $contenido .= "<a href='" . $_ENV['APP_URL'] . "/confirmar-cuenta?token=" . $this->token . "'>Confirmar Cuenta</a>";
         $contenido .= "<br>";
         $contenido .= "<hr>";
         $contenido .= "<p class='small'>Si no solicitaste esta cuenta, puedes ignorar este mensaje.</p>";
@@ -83,7 +83,7 @@ class Email {
         $mail->SMTPAuth = true;
         $mail->Port = $_ENV['EMAIL_PORT'];
         $mail->Username = $_ENV['EMAIL_USER'];
-        $mail->Password = $_ENV['EMAIL_PASSWORD'];
+        $mail->Password = $_ENV['EMAIL_PASS'];
     
         $mail->setFrom('cuentas@appsalon.com');
         $mail->addAddress($this->email);
