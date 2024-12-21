@@ -5,6 +5,7 @@ namespace Controllers;
 use Model\Cita;
 use Model\CitaServicio;
 use Model\Servicio;
+use Classes\Email;
 
 class APIController {
     public static function index() {
@@ -14,7 +15,6 @@ class APIController {
 
     public static function guardar() {
 
-        debuguear($_SESSION);
         //Almacena la Cita y devuelve el Id de la cita        
         $cita = new Cita($_POST);
         $resultado = $cita->guardar();
@@ -33,6 +33,10 @@ class APIController {
             $citaServicio = new CitaServicio($args);
             $citaServicio->guardar();
         };
+
+        //Enviar email
+        $email = new Email($_SESSION['email'],$_SESSION['nombre'],$id);
+        $email->enviarCitas();
 
         //Retornamos una respuesta
 

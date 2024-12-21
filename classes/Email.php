@@ -3,13 +3,14 @@
 namespace Classes;
 
 use PHPMailer\PHPMailer\PHPMailer;
+use Model\AdminCitaFecha;
 
 class Email {
 
     public $email;
     public $nombre;
     public $token;
-    
+
     public function __construct($email, $nombre, $token)
     {
         $this->email = $email;
@@ -151,6 +152,29 @@ class Email {
         $mail->isHTML(TRUE);
         $mail->CharSet = 'UTF-8';
 
+        //Consultar la BBDD
+        $consulta = "SELECT citas.id, citas.hora, citas.fecha, CONCAT( usuarios.nombre, ' ', usuarios.apellido) as cliente, ";
+        $consulta .= " usuarios.email, usuarios.telefono, servicios.nombre as servicio, servicios.precio  ";
+        $consulta .= " FROM citas  ";
+        $consulta .= " LEFT OUTER JOIN usuarios ";
+        $consulta .= " ON citas.usuarioId=usuarios.id  ";
+        $consulta .= " LEFT OUTER JOIN citasServicios ";
+        $consulta .= " ON citasServicios.citaId=citas.id ";
+        $consulta .= " LEFT OUTER JOIN servicios ";
+        $consulta .= " ON servicios.id=citasServicios.servicioId ";
+        $consulta .= " WHERE citas.id = " . $this->token;
+
+        $citas = AdminCitaFecha::SQL($consulta);
+        $lista = "";
+        if ($citas) {
+            foreach($citas as $key ) {
+                $lista .= "<p>Servicio: " . $key->servicio . " Precio: " . $key->precio . "</p>";
+            }
+        }  else {
+            $lista .= "<p>No se encontraron citas.</p>";
+        };
+
+
         $contenido = "<html>";
         $contenido .= "<head>";
         $contenido .= "<style>";
@@ -178,6 +202,9 @@ class Email {
         $contenido .= "<p>Hola <span style='color: #3498db;'>" . $this->nombre . "</span>,</p>";
         $contenido .= "<p>Te enviamos la información de la cita solicitada en APP-Salon.</p>";
         $contenido .= "<br>";
+        $contenido .= "<h2>Fecha:" . $citas[0]->fecha . " </h2>";
+        $contenido .= "<h3>Hora:" . $citas[0]->hora . " </h3>";
+        $contenido .= "<p>" . $lista . "</p>";
         $contenido .= "<hr>";
         $contenido .= "<p class='small'>Si no fuiste tú, puedes ignorar este mensaje.</p>";
         $contenido .= "</div>";
