@@ -10,3 +10,10 @@
         <a class="boton" href="/servicios/crear">Nuevo Servicio</a>
     </div>
 <?php } ?>
+
+<?php if(!isset($_SESSION['admin'])) { ?>
+    <div class="barra-servicios">
+    <a class="boton" href="/cita">Pedir Citas</a>
+    <a class="boton" href="/anular-cita">Anular Citas</a>
+    </div>
+<?php } ?>

@@ -16,7 +16,7 @@ class CitaController {
             'id' => $_SESSION['id']
         ]);
     }
-    public static function modificar(Router $router) {
+    public static function anular(Router $router) {
         
         session_start();
         isAuth();
@@ -41,7 +41,7 @@ class CitaController {
 
         $citas = AdminCita::SQL($consulta);
 
-        $router->render('cita/modificar', [
+        $router->render('cita/anular', [
             'nombre'=>$_SESSION['nombre'], 
            'citas'=>$citas,
            'fecha'=>$fecha

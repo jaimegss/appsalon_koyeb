@@ -1,4 +1,4 @@
-<h1 class="nombre-pagina">Modificar Citas</h1>
+<h1 class="nombre-pagina">Anular Citas</h1>
 <?php
     include_once __DIR__ . '/../templates/barra.php';
 ?>
