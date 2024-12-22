@@ -220,7 +220,7 @@ function mostrarAlerta (mensaje, tipo, elemento, desaparece = true) {
 
 function mostrarResumen() {
     const resumen = document.querySelector('.contenido-resumen');
-console.log(resumen.firstChild);
+//console.log(resumen.firstChild);
     //Limpiar el contenido de Resumen
     while (resumen.firstChild) {
         resumen.removeChild(resumen.firstChild);

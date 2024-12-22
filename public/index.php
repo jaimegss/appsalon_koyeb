@@ -33,6 +33,8 @@ $router->get('/mensaje', [LoginController::class, 'mensaje']);
 
 //AREA PRIVADA
 $router->get('/cita', [CitaController::class, 'index']);
+$router->get('/actualizar-cita', [CitaController::class, 'modificar']);
+
 $router->get('/admin', [AdminController::class, 'index']);
 
 //API de Citas

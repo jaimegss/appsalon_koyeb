@@ -1,5 +1,4 @@
-<h1 class="nombre-pagina">Panel de Administracción</h1>
-
+<h1 class="nombre-pagina">Modificar Citas</h1>
 <?php
     include_once __DIR__ . '/../templates/barra.php';
 ?>
@@ -17,12 +16,6 @@
         </div>
     </form>
 </div>
-
-<?php
-    if(count($citas) === 0) {
-        echo "<h2>NO Hay Citas en esta fecha</h2>";
-    }
-?>
 
 <div id="citas-admin">
     <ul class="citas">
